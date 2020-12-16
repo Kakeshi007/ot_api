@@ -138,7 +138,7 @@ app.get('/otnormal/', async(req, res, next)=>{
 })
 
 // get ot normal by id
-app.get('/otnormar/:id', async(req, res, next)=>{
+app.get('/otnormal/:id', async(req, res, next)=>{
     var id = req.params.id;
     try{
         var rs = await model.getOtnormalById(dbOt, id);

@@ -21,7 +21,7 @@ module.exports = {
     },
     getOtnormalById(db, id){
         return db('ot')
-        .where('id');
+        .where('id',id);
     },
     getOtnormalAll(db, id){
         return db('ot');
