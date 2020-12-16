@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser');
 const model = require('./model.js');
@@ -35,22 +36,22 @@ app.use(function (req, res, next) {
 var dbKsh = require('knex')({
     client: 'mysql',
     connection: {
-      host: 'localhost',
-      user: 'root',
-      port: '3306',
-      password: '',
-      database: 'db_ksh'
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      port: process.env.DB_PORT,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME_KSH
     }
   });
 
   var dbOt = require('knex')({
     client: 'mysql',
     connection: {
-      host: 'localhost',
-      user: 'root',
-      port: '3306',
-      password: '',
-      database: 'ot'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        port: process.env.DB_PORT,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME_OT
     }
   });
 
