@@ -38,7 +38,7 @@ var dbKsh = require('knex')({
       host: 'localhost',
       user: 'root',
       port: '3306',
-      password: '12345678',
+      password: '',
       database: 'db_ksh'
     }
   });
@@ -49,7 +49,7 @@ var dbKsh = require('knex')({
       host: 'localhost',
       user: 'root',
       port: '3306',
-      password: '12345678',
+      password: '',
       database: 'ot'
     }
   });
