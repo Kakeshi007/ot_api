@@ -128,9 +128,13 @@ app.delete('/otnormal/:id', async(req, res, next)=>{
 });
 
 //get ot normal
-app.get('/otnormal/', async(req, res, next)=>{
+app.get('/otnormal/:payroll/:year/:month/:cycle', async(req, res, next)=>{
+    var payroll = req.params.payroll;
+    var year = req.params.year;
+    var month = req.params.month;
+    var cycle = req.params.cycle;
     try{
-        var rs = await model.getOtnormalAll(dbOt);
+        var rs = await model.getOtnormalAll(dbOt, cycle, year, month, payroll);
         res.send({ok:true,rs:rs});
     }catch{
         res.send({ok:false, error:error.message});

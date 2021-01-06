@@ -23,7 +23,9 @@ module.exports = {
         return db('ot')
         .where('id',id);
     },
-    getOtnormalAll(db, id){
-        return db('ot');
-    }
+    getOtnormalAll(db, cycle, year, month, payroll){
+        return db('ot')
+        .select(db.raw("id, DAY(otdate) AS date, otdate, cycle, payroll"))
+        .whereRaw('cycle = ? AND YEAR(otdate) = ? AND MONTH(otdate) = ? AND payroll = ?', [cycle, year, month, payroll]);
+    },
 };
