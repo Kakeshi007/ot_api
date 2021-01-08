@@ -5,6 +5,8 @@ module.exports = {
         .where('person_username', data.username)
         .andWhere('person_password', data.password)
     },
+
+    //otnormal
     addOt(db, data){
         return db('ot')
         .insert(data);
@@ -28,4 +30,30 @@ module.exports = {
         .select(db.raw("id, DAY(otdate) AS date, otdate, cycle, payroll"))
         .whereRaw('cycle = ? AND YEAR(otdate) = ? AND MONTH(otdate) = ? AND payroll = ?', [cycle, year, month, payroll]);
     },
+
+    //refer
+    addRefer(db, data){
+        return db('refer')
+        .insert(data);
+    },
+    updateRefer(db, id, data){
+        return db('refer')
+        .where('id', id)
+        .update(data);
+    },
+    deleteRefer(db, id){
+        return db('refer')
+        .where('id', id)
+        .del();
+    },
+    getReferById(db, id){
+        return db('refer')
+        .where('id', id);
+    },
+    getReferAll(db, year, month, payroll){
+        return db('ot')
+        .select(db.raw("id, DAY(otdate) AS date, otdate, cycle, payroll"))
+        .whereRaw('cycle = ? AND YEAR(otdate) = ? AND MONTH(otdate) = ? AND payroll = ?', [cycle, year, month, payroll]);
+    },
+
 };

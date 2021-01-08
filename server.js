@@ -153,6 +153,107 @@ app.get('/otnormal/:id', async(req, res, next)=>{
 
 })
 
+
+// refer
+
+// add refer
+app.post('/refer/', async(req, res, next)=>{
+    var payroll = req.body.payroll;
+    var referdate = req.body.referdate;
+    var refertime = req.body.refertime;
+    var reciveat = req.body.reciveat;
+    var distance = req.body.distance;
+    var hospitalbegin = req.body.hospitalbegin;
+    var hospitalend = req.body.hospitalend;
+    var rate = req.body.rate;
+
+    var data = {
+        payroll : payroll,
+        referdate : referdate,
+        refertime : refertime,
+        reciveat : reciveat,
+        distance : distance,
+        hospitalbegin : hospitalbegin,
+        hospitalend : hospitalend,
+        rate : rate
+    };
+
+    try {
+        var rs = await model.addRefer(dbOt, data)
+        res.send({ok:true})
+    } catch (error) {
+        res.send({ok:false,error:error.message});
+    }
+})
+
+// update refer 
+app.put('/refer/:id', async(req, res, next)=>{
+    var id = req.params.id;
+
+    var payroll = req.body.payroll;
+    var referdate = req.body.referdate;
+    var refertime = req.body.refertime;
+    var reciveat = req.body.reciveat;
+    var distance = req.body.distance;
+    var hospitalbegin = req.body.hospitalbegin;
+    var hospitalend = req.body.hospitalend;
+    var rate = req.body.rate;
+
+    var data = {
+        payroll : payroll,
+        referdate : referdate,
+        refertime : refertime,
+        reciveat : reciveat,
+        distance : distance,
+        hospitalbegin : hospitalbegin,
+        hospitalend : hospitalend,
+        rate : rate
+    };
+
+    try {
+        var rs = await model.updateRefer(dbOt,id,data);
+        res.send({ok:true});
+    } catch (error) {
+        res.send({ok:false,error:error.message});
+    }
+});
+
+// delete refer
+app.delete('/refer/:id', async(req, res, next)=>{
+    var id = req.params.id;
+    try{
+        var rs = await model.deleteRefer(dbOt, id);
+        res.send({ok:true});
+    }catch{
+        res.send({ok:false,error:error.message});
+    }
+});
+
+//get refer by month
+app.get('/refer/:payroll/:year/:month/', async(req, res, next)=>{
+    var payroll = req.params.payroll;
+    var year = req.params.year;
+    var month = req.params.month;
+    try{
+        var rs = await model.getReferAll(dbOt, year, month, payroll);
+        res.send({ok:true,rs:rs});
+    }catch{
+        res.send({ok:false, error:error.message});
+    }
+})
+// get refer by id
+app.get('/refer/:id', async(req, res, next)=>{
+    var id = req.params.id;
+    try{
+        var rs = await model.getReferById(dbOt, id);
+        res.send({ok:true,rs:rs});
+    }catch{
+        res.send({ok:false, error:error.message});
+    }
+
+})
+
+
 app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(port, () => console.log(`Example app listening on port port!`))
 
