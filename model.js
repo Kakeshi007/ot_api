@@ -56,4 +56,10 @@ module.exports = {
         .whereRaw('cycle = ? AND YEAR(otdate) = ? AND MONTH(otdate) = ? AND payroll = ?', [cycle, year, month, payroll]);
     },
 
+    //hospital
+    getHospital(db){
+        return db('hospital')
+        .select('id', 'hospital');
+    },
+
 };

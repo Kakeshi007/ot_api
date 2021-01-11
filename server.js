@@ -240,7 +240,7 @@ app.get('/refer/:payroll/:year/:month/', async(req, res, next)=>{
     }catch{
         res.send({ok:false, error:error.message});
     }
-})
+});
 // get refer by id
 app.get('/refer/:id', async(req, res, next)=>{
     var id = req.params.id;
@@ -250,8 +250,19 @@ app.get('/refer/:id', async(req, res, next)=>{
     }catch{
         res.send({ok:false, error:error.message});
     }
+});
 
-})
+
+//get hospital
+app.get('/hospital/', async(req, res, next)=>{
+    try{
+        var rs = await model.getHospital(dbOt);
+        res.send({ok:true, rs:rs});
+    }catch{
+        res.send({ok:false, error:error.message});
+    }
+});
+
 
 
 app.get('/', (req, res) => res.send('Hello World!'))
